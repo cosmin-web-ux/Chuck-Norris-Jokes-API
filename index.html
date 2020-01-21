@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AJAX</title>
+</head>
+<body>
+  <h1>Chuck Norris Jokes</h1>
+  <div id="output"></div>
+  <button id="trigger">Get a Joke</button>
+  <script>
+    var output = document.getElementById('output');
+    var joker = document.querySelector('#trigger');
+    joker.addEventListener('click', loadJoke);
+
+    function loadJoke() {
+      const url = 'https://api.chucknorris.io/jokes/random';
+      fetch(url)
+        .then(res => res.json())
+        .then(json => {
+          console.log(json);
+          let html = '<div><img src="' + json.icon_url + '">' + json.value + '</div>';
+          document.querySelector('#output').innerHTML = html;
+        })
+        .catch(err => console.log(err))
+
+      // fetch('https://api.chucknorris.io/jokes/random').then(function(res) {
+      //   console.log(res.headers.get('Content-Type'))
+      //   console.log(res.headers.get('Date'))
+      //   console.log(res.type)
+      //   return res.json()
+      // }).then(function(json) {
+      //   console.log(json);
+      //   let html = '<div><img src="' + json.icon_url + '">' + json.value + '</div>';
+      //   document.querySelector('#output').innerHTML = html;
+      // }).catch(function(err) {
+      //   console.log(err)
+      // })
+    }
+  </script>
+</body>
+</html>
